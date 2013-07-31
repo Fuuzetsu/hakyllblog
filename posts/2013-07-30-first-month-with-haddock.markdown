@@ -49,7 +49,7 @@ and even run additional parsers on these.
 With these two main points in mind, Attoparsec was chosen with hopes that parser
 combinators will provide a cleaner, more maintainable and extendable
 implementation. As a downside, it depends on Data.Text which is currently not in
-[base](http://hackage.haskell.org/package/base-4.6.0.1). Fortunately, it also
+in GHC boot library. Fortunately, it also
 has a ByteString version which lets us avoid the problem.
 
 A word of advice: if you ever move around modules in an existing project, or
@@ -64,14 +64,14 @@ Tests
 When time to code actually came and I got GHC HEAD going (this is unfortunately
 a must for Haddock hacking. On an upside, you get all the cool HEAD stuff like
 TypeHoles), I very quickly realised that running tests was a major pain. There
-are two test suites: HTML tests and HSpec tests. HTML tests are just short
+are two test suites: HTML tests and Hspec tests. HTML tests are just short
 Haskell modules that we compile, generate documentation for and diff
 with reference, known-good HTML files. This means going to the shell, compiling
 haddock, running‘cabal test’, waiting for the other test-suite to run first and
 examining output. Even worse, if anything is actually wrong, you don't even get
 told which file it's in and you have to grep for the elements of the output.
 
-HSpec tests are the nice kind. The kind that you can load into GHCi and whenever
+Hspec tests are the nice kind. The kind that you can load into GHCi and whenever
 you're ready, simply ‘:r’ and ‘main’ to get a coloured output and clear
 indication of what's failing. The downside is that there were only about 5 cases
 there which means that you often passed these only to fail on HTML tests later.
@@ -81,14 +81,14 @@ and doing all the tedious stuff. My first remedy to this was less-than-pretty.
 I added trace statements to the part of the program that takes in strings and
 outputs our internal format (nested ‘Doc’ structure). With this, and a couple of
 minutes with emacs macros, I soon had hundreds of (rather redundant)
-HSpec tests without going out to the shell. I have later removed the
+Hspec tests without going out to the shell. I have later removed the
 redundancies and split them up into nice categories. This way we actually had
 some tests. I should note that there's one more type of testing I like to do and
 that is to download existing, large libraries that compile both with HEAD and
 stable, generating docs for them and then diffing the two. If this passes then
 I feel fairly confident that nothing major got broken.
 [HXT](http://hackage.haskell.org/package/hxt) was pretty good for this. Any
-problems discovered this way would go right into HSpec tests which is how
+problems discovered this way would go right into Hspec tests which is how
 the test-suite has naturally grown into ~75 reasonable test cases.
 
 Implementation
@@ -160,7 +160,8 @@ The square bracket will be treated as a regular character and will not need
 to be escaped.
 
 * You can now specify titles for your images as you would with URLs. The old
-`<foo.png>` image syntax now denotes an image without a title. `<foo.png bar>`
+`<<foo.png>>` image syntax now denotes an image without a title.
+`<<foo.png bar>>`
 denotes an image ‘foo.png’ with a title ‘bar’. Changes to the HTML and LaTeX
 backends were made to accommodate this. The markup generated for images without
 a title is identical to what it was before (no empty `title` attributes).
@@ -171,13 +172,22 @@ character will be treated as a URL. It is not possible to give such URL a title.
 No validation is done on the URL, to keep the parser simple (but it has been
 coded and if this simple approach proves problematic, might be put in) save for
 splitting trailing single-character punctuation. This is only in effect wherever
-URLs with the `<<example.com title>>` syntax are accepted.
+URLs with the `<example.com title>` syntax are accepted.
+
+* Module names (that is, strings between double quotes) are now only accepted if
+they clearly aren't syntactically incorrect. That is, enclosing strings that
+contain spaces or don't start with a capital letter in double quotes will no
+longer result in a hyperlink being created. Note that these aren't checked for
+actual validity or existence by GHC so links to non-existent modules are still
+possible.
 
 Plans
 -----
 * GADT support is still planned as per the proposal.
 
 * Markdown support is still planned as per the proposal.
+
+* Bold text
 
 * The module header will no longer require that the fields are in strict order.
 If you know why this limitation was imposed save for implementation convenience,
@@ -196,3 +206,5 @@ any) demand for this feature.
 * Documentation has to be updated. All the new features have to be documented
 and even some old features which still aren't (such as the `<<img>>` tag) and
 uploaded on haskell.org.
+
+Any syntax extensions are unlikely to break any existing documentation.
