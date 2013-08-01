@@ -1,6 +1,5 @@
 ---
 title: First month with Haddock
-description: Overview of the first month of the Haddock GSOC project
 author: Fūzetsu
 ---
 

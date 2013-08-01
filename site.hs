@@ -2,8 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Data.Monoid (mappend)
 import           Hakyll
-
-
+import Control.Arrow
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
@@ -26,11 +25,12 @@ main = hakyll $ do
             >>= relativizeUrls
 
     match "posts/*" $ do
-        route $ setExtension "html"
-        compile $ pandocCompiler
-            >>= loadAndApplyTemplate "templates/post.html"    postCtx
-            >>= loadAndApplyTemplate "templates/default.html" postCtx
-            >>= relativizeUrls
+      route $ setExtension "html"
+      compile $ pandocCompiler
+        >>= loadAndApplyTemplate "templates/post.html"    postCtx
+        >>= saveSnapshot "content"
+        >>= loadAndApplyTemplate "templates/default.html" postCtx
+        >>= relativizeUrls
 
     create ["archive.html"] $ do
         route idRoute
@@ -47,23 +47,20 @@ main = hakyll $ do
                 >>= relativizeUrls
 
     create ["atom.xml"] $ do
-      route idRoute
-      compile $ do
-        let feedCtx = postCtx `mappend`
-                constField "description" "This is the post description"
-
-        posts <- fmap (take 10) . recentFirst =<< loadAll "posts/*"
+    route idRoute
+    compile $ do
+        let feedCtx = postCtx `mappend` bodyField "description"
+        posts <- fmap (take 10) . recentFirst =<<
+                 loadAllSnapshots "posts/*" "content"
         renderAtom myFeedConfiguration feedCtx posts
 
     create ["rss.xml"] $ do
       route idRoute
       compile $ do
-        let feedCtx = postCtx `mappend`
-                constField "description" "This is the post description"
-
-        posts <- fmap (take 10) . recentFirst =<< loadAll "posts/*"
-        renderRss myFeedConfiguration feedCtx posts
-
+        let feedCtx = postCtx `mappend` bodyField "description"
+        posts <- fmap (take 10) . recentFirst =<<
+                 loadAllSnapshots "posts/*" "content"
+        renderAtom myFeedConfiguration feedCtx posts
 
     match "index.html" $ do
         route idRoute
