@@ -70,7 +70,7 @@ failure. If it's a Haddock error, fix it. I made your job easier and
 made [a list of packages which seem to simply have malformed Haddock
 comments][6]. I had manually fixed and formed pull request for the
 bottom third of these. It's usually very easy to fix! See
-[Haddock manual][7] for help on syntax. You can also ping me on IRC
+[Haddock manual][12] for help on syntax. You can also ping me on IRC
 (Fuuzetsu) and I'll be happy to point out what might be wrong.
 
 Another kind of failure one might get this way is HsColour failure:
@@ -172,3 +172,4 @@ https://github.com/haskell/hackage-server/issues/145#issuecomment-30129142
 [9]: https://gist.github.com/Fuuzetsu/8276445
 [10]: http://fuuzetsu.co.uk/misc/H.hs
 [11]: http://fuuzetsu.co.uk/images/shana_meronpan.jpeg
+[12]: http://www.haskell.org/haddock/doc/html/
