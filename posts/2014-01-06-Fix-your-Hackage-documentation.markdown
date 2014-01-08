@@ -159,6 +159,11 @@ I hope I encouraged you to make your Hackage documentation work again!
 Have [some fan service][11] for making it all the way to the end of
 the tedious post.
 
+EDIT: See updates to this post [here][13], it tells you how to fix
+package cross-linking and stuff. Also, please keep reading
+[the mailing list thread][4] for further developments. Nice people
+post their scripts to do this stuff and in general these issues are discussed.
+
 [1]: http://hackage.haskell.org/api
 [2]:
 https://github.com/haskell/hackage-server/issues/11#issuecomment-31593476
@@ -173,3 +178,4 @@ https://github.com/haskell/hackage-server/issues/145#issuecomment-30129142
 [10]: http://fuuzetsu.co.uk/misc/H.hs
 [11]: http://fuuzetsu.co.uk/images/shana_meronpan.jpeg
 [12]: http://www.haskell.org/haddock/doc/html/
+[13]: http://fuuzetsu.co.uk/blog/posts/2014-01-06-Hackage-documentation-v2.html
