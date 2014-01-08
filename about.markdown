@@ -2,8 +2,7 @@
 title: About
 --------------
 
-I'm a Computer Science student in University of Bath, going onto my third year.
-
+I'm a second year Computer Science student in University of Bath.
 
 This blog is where I'll publish any programming related musings I deem
 interesting enough to share or talk about.
