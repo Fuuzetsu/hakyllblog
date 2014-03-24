@@ -705,15 +705,15 @@ regression in this release which we don't get to fix until GHC 7.8.2.
 
 Namely, if you have a (very common) comment like this:
 
-    ```haskell
-    -- |
-    -- @
-    -- some code
-    -- goes here
-    -- @
-    f :: ()
-    f = ()
-    ```
+```haskell
+-- |
+-- @
+-- some code
+-- goes here
+-- @
+f :: ()
+f = ()
+```
 
 2.13.2 will render it like this:
 
