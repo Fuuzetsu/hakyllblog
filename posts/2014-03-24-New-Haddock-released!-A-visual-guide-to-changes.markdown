@@ -19,7 +19,7 @@ see here are the tickets as seen on [Haddock Trac][trac]. We're
 actually planning to move everything to GitHub soon so keep that in
 mind if you're reading this further in the future. Note that pretty
 much everything here is described in
-[Haddock documentation][haddockdoc] (although without nice examples)
+[Haddock documentation][haddockdocs] (although without nice examples)
 so please refer to that if you need further information.
 
 Let's begin!
