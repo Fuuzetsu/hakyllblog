@@ -1,0 +1,68 @@
+---
+date:   2014-04-02 23:03:20
+title:  Haddock 2.14.2
+author: Fūzetsu
+---
+
+This is just a quick follow-up to my previous post. We have now
+released Haddock 2.14.2 which contains few minor changes. The reason
+for this release is to get a few quick patches in. No fancy overview
+today, just quick mentions. Here is the relevant part of the
+changelog:
+
+Changes in version 2.14.2
+
+ * Always drop --split-objs GHC flag for performance reasons [(#292)][292]
+
+ * Print kind signatures GADTs [(#85)][85]
+
+ * Drop single leading whitespace when reasonable from @-style blocks [(#201)][201]
+
+ * Fix crashes associated with exporting data family record selectors [(#294)][294]
+
+[#201][201] was the the annoying aesthetics bug I mentioned last time and
+that is now fixed.
+
+[#294][294] was a bug we're glad to have gotten rid of
+now: it was only reported recently but I imagine more and more
+projects would have start to hit it.
+
+[#292][292] should improve
+performance considerably in some special cases, such as when Template
+Haskell is being used.
+
+[#85][85] was just a quick resolution of years old ticket, I think
+you'll find it useful.
+
+I predict that this is the version that will ship with GHC 7.8.1 and I
+don't think we'll have any more 2.14.x releases.
+
+Ideally I'd like to get well under 100 open tickets for the next
+release (there are currently 117 open).
+
+Some things I will be concentrating on next is splitting up Haddock
+into a few packages and working on the Hoogle back-end. The Hoogle
+back-end is incredibly broken which is a shame considering Hoogle is a
+very useful service. We want to make the maintainers life easier.
+
+Splitting up Haddock into a few packages will be of great advantage to
+people wishing to use (parts of) Haddock as a library without
+adding a dependency on a specific version of GHC to their program. It
+should also become much easier to implement and maintain your own
+back-ends.
+
+If you are interested in helping out with Haddock, we'd love to have
+you. Pop into #haddock on Freenode, make some noise and wait for
+someone to respond. Alternatively, [contact me][contact] through
+other means.
+
+PS: While I realise that some of my posts make it on reddit, I myself
+do not use it. You're welcome to discuss these but if you leave
+questions or messages to me on reddit, I will almost certainly not see
+them. If you want my attention, please either use e-mail or IRC. Thanks!
+
+[201]: http://trac.haskell.org/haddock/ticket/201
+[294]: http://trac.haskell.org/haddock/ticket/294
+[292]: http://trac.haskell.org/haddock/ticket/292
+[85]: http://trac.haskell.org/haddock/ticket/85
+[contact]: /contact.html
