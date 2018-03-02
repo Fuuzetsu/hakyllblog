@@ -2,14 +2,6 @@
 title: About
 --------------
 
-I'm a second year Computer Science student in University of Bath.
-
-This blog is where I'll publish any programming related musings I deem
-interesting enough to share or talk about.
-
-Over the summer of 2013 I will be posting updates about
-[Haddock](http://www.haskell.org/haddock/), the
-project I'm hacking on as part of Google Summer of Code.
-
-The proposal being implemented can be seen
-[here](https://gist.github.com/Fuuzetsu/81253ba7d0c51ac88052).
+Indurstrial Haskell programmer in the business for a few years.
+Interested in writing efficient and code that's not completely
+disgusting at the same time.
