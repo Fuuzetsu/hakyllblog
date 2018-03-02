@@ -1,11 +1,18 @@
---------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
-import           Data.Monoid (mappend)
-import           Hakyll
+module Main (main) where
+
 import Control.Arrow
---------------------------------------------------------------------------------
+import Data.Monoid (mappend)
+import Hakyll
+import Data.Default (def)
+
+siteConfig :: Configuration
+siteConfig = def
+  { deployCommand = "rsync -ave 'ssh' _site/ shana@fuuzetsu.co.uk:sites/fuuzetsu.co.uk/blog/"
+  }
+
 main :: IO ()
-main = hakyll $ do
+main = hakyllWith siteConfig $ do
     match "images/*" $ do
         route   idRoute
         compile copyFileCompiler
