@@ -1,6 +1,7 @@
 ---
 title: A case for .Internal modules.
 author: Fūzetsu
+published: 2018-03-02T22:20:00Z
 ---
 
 Many libraries expose `.Internal` modules: these are module that
